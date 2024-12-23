@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const meetingRoutes = require("./routes/meeting.route");
 const userRoutes = require("./routes/user.route");
 const cors = require("cors");
+const morgan = require("morgan");
 
 const app = express();
 app.use(
@@ -10,6 +11,7 @@ app.use(
     origin: "*",
   })
 );
+app.use(morgan("dev"));
 app.use(bodyParser.json());
 
 app.use("/api", meetingRoutes);
@@ -20,6 +22,8 @@ app.use("/", (req, res) => {
 });
 
 const port = process.env.PORT || 9000;
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+
+module.exports = { app, server };
