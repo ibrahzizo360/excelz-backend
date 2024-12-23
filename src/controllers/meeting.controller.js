@@ -8,9 +8,18 @@ const {
 } = require("../models/Meeting.model");
 
 function createMeeting(req, res) {
-  const { date, time, duration, participants } = req.body;
+  const { date, time, duration, participants, description, location, title } =
+    req.body;
 
-  if (!date || !time || !duration || !participants) {
+  if (
+    !date ||
+    !time ||
+    !duration ||
+    !participants ||
+    !description ||
+    !location ||
+    !title
+  ) {
     return res.status(400).send("Missing required meeting details");
   }
 
@@ -20,6 +29,9 @@ function createMeeting(req, res) {
     time,
     duration,
     participants,
+    description,
+    location,
+    title,
   };
 
   addMeeting(meeting);

@@ -3,7 +3,6 @@ const {
   getMeetings: getMeetingsFromModel,
 } = require("../models/Meeting.model");
 
-// Add a new user
 function createUser(req, res) {
   const { id, name, email, role } = req.body;
 
@@ -17,17 +16,15 @@ function createUser(req, res) {
   res.status(201).json(newUser);
 }
 
-// Fetch all users
 function fetchUsers(req, res) {
   const users = getUsers();
   res.json(users);
 }
 
-// Fetch available time slots for a user
 function fetchAvailableTimeSlots(req, res) {
-  const userId = req.params.id;
+  const userId = req.params.userId;
 
-  // Fetch all meetings and filter by user
+  // Fetching all meetings and filter by user
   const meetings = getMeetingsFromModel();
   const userMeetings = meetings.filter((meeting) =>
     meeting.participants.includes(userId)
@@ -37,7 +34,7 @@ function fetchAvailableTimeSlots(req, res) {
     return res.status(404).send("No meetings found for the user");
   }
 
-  // Define user's working hours (example: 9 AM to 5 PM)
+  // Let's say the user's working hours is 9 AM to 5 PM
   const workingHours = { start: 9, end: 17 };
   const timeSlots = [];
 

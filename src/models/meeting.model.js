@@ -1,4 +1,23 @@
-let meetings = [];
+let meetings = [
+  {
+    date: "2024-12-22",
+    time: "09:00",
+    duration: 30,
+    participants: ["Alice", "Bob"],
+    title: "Standup Meeting",
+    description: "Daily standup meeting to discuss progress and blockers.",
+    location: "Conference Room A",
+  },
+  {
+    date: "2024-12-22",
+    time: "10:00",
+    title: "Sprint Planning",
+    duration: 90,
+    participants: ["Team Alpha"],
+    description: "Planning session for the upcoming project phase.",
+    location: "Zoom",
+  },
+];
 
 function getMeetings() {
   return meetings;

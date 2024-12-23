@@ -9,6 +9,6 @@ const router = express.Router();
 
 router.post("/users", createUser);
 router.get("/users", fetchUsers);
-router.get("/users/:id/available-slots", fetchAvailableTimeSlots);
+router.get("/users/:userId/available-slots", fetchAvailableTimeSlots);
 
 module.exports = router;
