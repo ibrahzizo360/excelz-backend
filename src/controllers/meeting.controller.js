@@ -1,11 +1,10 @@
-// src/controllers/meeting.controller.js
 const {
   addMeeting,
   getMeetings: getMeetingsFromModel,
   getMeetingById,
   updateMeeting: updateMeetingInModel,
   deleteMeeting: deleteMeetingFromModel,
-} = require("../models/Meeting.model");
+} = require("../models/meeting.model");
 
 function createMeeting(req, res) {
   const {
