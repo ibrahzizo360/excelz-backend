@@ -1,7 +1,7 @@
 const { addUser, getUsers } = require("../models/user.model");
 const {
   getMeetings: getMeetingsFromModel,
-} = require("../models/Meeting.model");
+} = require("../models/meeting.model");
 
 function createUser(req, res) {
   const { id, name, email, role } = req.body;
