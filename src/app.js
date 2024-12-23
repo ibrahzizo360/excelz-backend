@@ -6,9 +6,16 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 const app = express();
+// app.use(
+//   cors({
+//     origin: ["https://excelz-frontend.vercel.app/", "http://localhost:5173"],
+//   })
+// );
 app.use(
   cors({
-    origin: ["https://excelz-frontend.vercel.app/", "http://localhost:5173"],
+    origin: ["https://excelz-frontend.vercel.app", "http://localhost:5173"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
   })
 );
 app.use(morgan("dev"));
