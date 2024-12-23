@@ -15,6 +15,10 @@ app.use(bodyParser.json());
 app.use("/api", meetingRoutes);
 app.use("/api", userRoutes);
 
+app.use("/", (req, res) => {
+  res.send("Welcome to the Meeting Planner API");
+});
+
 const port = process.env.PORT || 9000;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

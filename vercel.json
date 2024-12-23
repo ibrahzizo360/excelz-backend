@@ -1,0 +1,20 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "src/app.js",  
+        "use": "@vercel/node",    
+        "config": {
+          "maxLambdaSize": "50mb" 
+        }
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",            
+        "dest": "/src/app.js" 
+      }
+    ],
+    "buildCommand": "npm run build"         
+  }
+  
