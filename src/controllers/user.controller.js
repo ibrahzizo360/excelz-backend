@@ -23,6 +23,7 @@ function fetchUsers(req, res) {
 
 function fetchAvailableTimeSlots(req, res) {
   const userId = req.params.userId;
+  const selectedDate = new Date(req.query.date);
 
   // Fetching all meetings and filter by user
   const meetings = getMeetingsFromModel();
@@ -30,21 +31,33 @@ function fetchAvailableTimeSlots(req, res) {
     meeting.participants.includes(userId)
   );
 
-  if (!userMeetings) {
-    return res.status(404).send("No meetings found for the user");
-  }
-
-  // Let's say the user's working hours is 9 AM to 5 PM
+  // User's working hours
   const workingHours = { start: 9, end: 17 };
   const timeSlots = [];
 
   // Loop through the day and find available slots
   for (let hour = workingHours.start; hour < workingHours.end; hour++) {
-    const isSlotTaken = userMeetings.some(
-      (meeting) =>
-        new Date(meeting.time).getHours() === hour &&
-        meeting.participants.includes(userId)
-    );
+    const slotStartTime = new Date(selectedDate);
+    slotStartTime.setHours(hour, 0, 0, 0); // Set hour and reset minutes, seconds, milliseconds
+
+    const slotEndTime = new Date(selectedDate);
+    slotEndTime.setHours(hour + 1, 0, 0, 0); // Set hour to one hour later
+
+    const isSlotTaken = userMeetings.some((meeting) => {
+      // Parse meeting start and end times
+      const meetingDate = new Date(meeting.date);
+      const [meetingHour, meetingMinute] = meeting.time.split(":").map(Number);
+      const meetingStartTime = new Date(meetingDate);
+      meetingStartTime.setHours(meetingHour, meetingMinute, 0, 0);
+
+      const meetingEndTime = new Date(meetingStartTime);
+      meetingEndTime.setMinutes(
+        meetingStartTime.getMinutes() + meeting.duration
+      );
+
+      // Check if the meeting overlaps with the time slot
+      return meetingStartTime < slotEndTime && meetingEndTime > slotStartTime;
+    });
 
     if (!isSlotTaken) {
       timeSlots.push(`${hour}:00 - ${hour + 1}:00`);

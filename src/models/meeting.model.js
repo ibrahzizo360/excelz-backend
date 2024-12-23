@@ -1,19 +1,21 @@
 let meetings = [
   {
+    id: "1",
     date: "2024-12-22",
     time: "09:00",
     duration: 30,
-    participants: ["Alice", "Bob"],
+    participants: ["1", "2"],
     title: "Standup Meeting",
     description: "Daily standup meeting to discuss progress and blockers.",
     location: "Conference Room A",
   },
   {
+    id: "2",
     date: "2024-12-22",
     time: "10:00",
     title: "Sprint Planning",
     duration: 90,
-    participants: ["Team Alpha"],
+    participants: ["1", "2"],
     description: "Planning session for the upcoming project phase.",
     location: "Zoom",
   },
