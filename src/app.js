@@ -6,6 +6,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 const app = express();
+
 app.use(
   cors({
     origin: ["https://excelz-frontend.vercel.app", "http://localhost:5173"],
